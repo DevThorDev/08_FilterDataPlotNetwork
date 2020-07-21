@@ -6,7 +6,6 @@ import copy, pprint
 
 import pandas as pd
 
-import Core.C_00__GenConstants as GC
 import Core.F_00__GenFunctions as GF
 import Core.F_01__SpcFunctions as SF
 
