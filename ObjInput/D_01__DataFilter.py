@@ -15,9 +15,9 @@ pRelDatFOut = GC.P_REL_DATF_NX
 
 # --- filtering ---------------------------------------------------------------
 sSelBC2 = 'G'                   # 'X'; X in {'A',..., 'G'}
-lSNumAttr = [GC.S_I_DVCL_P]     # S_CORR / S_I_DVCL_P / S_I_DVCL_N 
+lSNumAttr = [GC.S_I_DVCL_P, GC.S_CORR]     # S_CORR / S_I_DVCL_P / S_I_DVCL_N 
                                 # S_I_DVCL_PN
-lThrNum = [7.25]                 # numeric threshold values (attr. in lSNumAttr)
+lThrNum = [7.25, 0.5]                 # numeric threshold values (attr. in lSNumAttr)
 
 selOpETr = GC.S_AVG             # S_AVG / S_MAX (edge trace operation)
 
