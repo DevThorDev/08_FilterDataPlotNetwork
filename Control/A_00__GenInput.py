@@ -5,7 +5,7 @@
 import Core.C_00__GenConstants as GC
 
 # --- flow control ------------------------------------------------------------
-doNetworkPlot = True    # True / False (plotting of network data)
+doNetworkPlot = False    # True / False (plotting of network data)
 
 # --- output and debug info ---------------------------------------------------
 levelDebugOut = 2       # level of debug output (0: no debug output)
@@ -41,9 +41,6 @@ sBinC1 = GC.S_BIN_C_1
 
 sSrtFlt = GC.S_SRT_FLT
 
-lSPhoCl = GC.L_S_PHO_CL
-dBinCode2 = GC.D_BC2
-
 # --- predefined numbers ------------------------------------------------------
 kMxClrV = GC.MAX_CLR_VAL
 kIDtEdgeAttr = GC.INDEX_DATA_EDGE_ATTR
@@ -51,6 +48,11 @@ kAttr1 = GC.ATTR_1
 kAttr2 = GC.ATTR_2
 
 kDigRnd04 = GC.K_DIG_RND_04
+
+# --- predefined lists and dictionaries ---------------------------------------
+dSCmp = GC.D_S_CMP
+lSPhoCl = GC.L_S_PHO_CL
+dBinCode2 = GC.D_BC2
 
 # === create input dictionary =================================================
 dictInpG = {# --- flow control
@@ -81,13 +83,15 @@ dictInpG = {# --- flow control
             'sBinC2': sBinC2,
             'sBinC1': sBinC1,
             'sSrtFlt': sSrtFlt,
-            'lSPhoCl': lSPhoCl,
-            'dBinCode2': dBinCode2,
             # --- predefined numbers
             'kMxClrV': kMxClrV,
             'kIDtEdAt': kIDtEdgeAttr,
             'kAttr1': kAttr1,
             'kAttr2': kAttr2,
-            'kDigRnd04': kDigRnd04}
+            'kDigRnd04': kDigRnd04,
+            # --- predefined lists and dictionaries
+            'dSCmp': dSCmp,
+            'lSPhoCl': lSPhoCl,
+            'dBinCode2': dBinCode2}
 
 ###############################################################################
