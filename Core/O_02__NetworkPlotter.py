@@ -18,10 +18,14 @@ class NetworkPlotter(BaseClass):
         self.dITp = copy.deepcopy(self.dIG[0])  # type of base class = 0
         for iTpU in lITpUpd + [iTp]:            # updated with types in list
             self.dITp.update(self.dIG[iTpU])
-        sFNetwPlt = (GC.S_NETW_PLOT + '__' + self.dITp['sSelBC2'] + '_' +
-                     self.dITp['sSelGT'] + '_' + self.dITp['sTask1'] + '_' +
-                     self.dITp['sTask2'] + '.' + GC.S_EXT_PDF)
-        self.addToDITp('sFNetwPlt', sFNetwPlt)
+        sPltS = GC.S_NETW_PLOT
+        dSFNwPlt = {(sGT, sSelBC2): (sPltS + '__' + self.dITp['lSSelBC2F'][k] +
+                                     '_' + sGT + '_' + self.dITp['sTask1'] +
+                                     '_' + self.dITp['sTask2'] + '.' +
+                                     GC.S_EXT_PDF)
+                    for k, sSelBC2 in enumerate(self.dITp['lSSelBC2'])
+                    for sGT in self.dITp['lSGT']}
+        self.addToDITp('dSFNwPlt', dSFNwPlt)
         print('Initiated "NetworkPlotter" base object.')
 
     def __str__(self):
@@ -33,10 +37,10 @@ class NetworkPlotter(BaseClass):
         print('-'*20, 'Type dictionary:', '-'*20)
         pprint.pprint(self.dITp)
         
-    def createSaveFigure(self, dfrSF):
-        lEdgeTrace, lNodeTrace = PF.getTraceLists(self.dITp, dfrSF)
-        fig = PF.createFigure(self.dITp, lEdgeTrace, lNodeTrace)
-        fig.write_image(GF.joinToPath(self.dITp['pRelPltF'],
-                                      self.dITp['sFNetwPlt']))
+    def createSaveFigures(self, dDfrSF):
+        for cK, sFNwPlt in self.dITp['dSFNwPlt'].items():
+            lEdgeTrace, lNodeTrace = PF.getTraceLists(self.dITp, dDfrSF[cK])
+            fig = PF.createFigure(self.dITp, lEdgeTrace, lNodeTrace)
+            fig.write_image(GF.joinToPath(self.dITp['pRelPltF'], sFNwPlt))
 
 ###############################################################################

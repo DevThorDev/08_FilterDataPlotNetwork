@@ -14,7 +14,6 @@ def startSimu():
     startTime = time.time()
     print('+'*50 + ' START', time.ctime(startTime), '+'*30)
     print('Filter data and plot network')
-    # plt.close('all')
     return startTime
 
 def createDir(pF):

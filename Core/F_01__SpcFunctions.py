@@ -10,9 +10,9 @@ import Core.C_00__GenConstants as GC
 import Core.F_00__GenFunctions as GF
 
 # --- Functions (filtering) ---------------------------------------------------
-def calcFromCVal(dITp, lDfr):
+def calcFromCVal(dITp, dFlt, lDfr):
     cOp, lDfrR = dITp['selOpETr'], []
-    numK, tHd = dITp['dFilt'][cOp]
+    nK, tHd = dFlt[cOp]
     # flatten the possibly nested list of DataFrames first
     for k in range(len(tHd) - 1):
         lDfr = GF.flattenIt(lDfr)
@@ -20,33 +20,42 @@ def calcFromCVal(dITp, lDfr):
         # get the maximum or average of all values with same tHd-def. columns
         for cDfr in lDfr:
             if cOp == GC.S_MAX:
-                cDfr = cDfr[cDfr[numK] == max(cDfr[numK])]
+                cDfr = cDfr[cDfr[nK] == max(cDfr[nK])]
                 if cDfr.shape[0] > 1:
                     cDfr = cDfr.iloc[0, :].to_frame().T
             elif cOp == GC.S_AVG:
-                cDfr.loc[:, numK] = round(np.mean(cDfr[numK]), GC.K_DIG_RND_04)
+                cDfr.loc[:, nK] = round(np.mean(cDfr[nK]), GC.K_DIG_RND_04)
                 cDfr = cDfr.iloc[0, :].to_frame().T
             lDfrR.append(cDfr)
         return GF.concPdDfrS(lDfrR, ignIdx = True)
 
-def sortAndFilter(dITp, pdDfr):
-    cOp, dSrt, dFlt = dITp['selOpETr'], dITp['dSort'], dITp['dFilt']
+def sortAndFilter(dITp, pdDfr, sSlBC2):
+    cOp, dSrt, dFlt = dITp['selOpETr'], dITp['dSort'], dITp['dDFilt'][sSlBC2]
     dfrM = pdDfr.copy()
     if dFlt is not None:
         if GC.S_SEL in dFlt:       # filter based on list of attributes
             for cK, cL in dFlt[GC.S_SEL].items():
-                dfrM = dfrM[dfrM[cK].isin(cL)].reset_index(drop = True)
+                if len(cL) > 0:
+                    dfrM = dfrM[dfrM[cK].isin(cL)].reset_index(drop = True)
+                else:
+                    dfrM.reset_index(drop = True)
         if GC.S_THR in dFlt:       # filter based on numeric threshold
             for (sCN, (sCmp, cThr)) in dFlt[GC.S_THR].items():
-                if sCmp == '>=':
-                    dfrM = dfrM[dfrM[sCN] >= cThr].reset_index(drop = True)
-                elif sCmp == '<=':
+                if sCmp == GC.S_EQ:
+                    dfrM = dfrM[dfrM[sCN] == cThr].reset_index(drop = True)
+                elif sCmp == GC.S_L:
+                    dfrM = dfrM[dfrM[sCN] < cThr].reset_index(drop = True)
+                elif sCmp == GC.S_G:
+                    dfrM = dfrM[dfrM[sCN] > cThr].reset_index(drop = True)
+                elif sCmp == GC.S_LE:
                     dfrM = dfrM[dfrM[sCN] <= cThr].reset_index(drop = True)
+                elif sCmp == GC.S_GE:
+                    dfrM = dfrM[dfrM[sCN] >= cThr].reset_index(drop = True)
                 else:
                     print('ERROR: Operation "', sCmp, '" not implemented.')
         if cOp in dFlt:
             # max. / avg. over all entries with the same col. header key tuple
-            dfrM = calcFromCVal(dITp, GF.splitDfr(dfrM, dFlt[cOp][1]))
+            dfrM = calcFromCVal(dITp, dFlt, GF.splitDfr(dfrM, dFlt[cOp][1]))
     if dSrt is not None:
         dfrM = dfrM.sort_values(list(dSrt), ascending = list(dSrt.values()),
                                 ignore_index = True)

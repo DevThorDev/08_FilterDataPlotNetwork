@@ -5,17 +5,27 @@
 import os
 
 # --- filter ------------------------------------------------------------------
-S_CORR = 'Correlation'
-S_I_DVCL_P = 'IdxPosDvClSD'
-S_I_DVCL_N = 'IdxNegDvClSD'
-S_I_DVCL_PN = 'IdxDvClSDPosNeg'
+S_I_DVCL_P = 'DvClP'
+S_I_DVCL_PN = 'DvClPN'
+S_ALL_BIN = 'AllBins'
 S_SEL_BIN_2 = 'SelBin2s'
+S_SEL_BIN_2_G = S_SEL_BIN_2 + 'G27'
 
 # --- general -----------------------------------------------------------------
 N_DIG_OBJ_2 = 2
 S_SEP_DOT = '.'
 S_SEP_P = 'p'
 S_SEP_SEMICOL = ';'
+S_EQ = '=='
+S_L = '<'
+S_G = '>'
+S_LE = '<='
+S_GE = '>='
+S_TXT_EQ = 'eq'
+S_TXT_L = 'l'
+S_TXT_G = 'g'
+S_TXT_LE = 'le'
+S_TXT_GE = 'ge'
 
 # --- file names, extensions and paths ----------------------------------------
 S_OBJINP = 'ObjInput'
@@ -24,10 +34,12 @@ S_OBJINP_PRE = 'D_'
 S_FILT_DAT = 'FiltDat'
 S_NETW_PLOT = 'NetworkPlot'
 
-P_REL_DATF_G = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
+P_REL_G_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
                             '21_R_81_BinaryOps')
-P_REL_DATF_NX = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
-                             '92_Networkx', '01_Data')
+P_REL_IN_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
+                             '92_Networkx', '00_BO_Input')
+P_REL_OUT_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
+                              '92_Networkx', '01_Data')
 P_REL_PLT_F = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
                            '92_Networkx', '09_Plots')
 
@@ -118,7 +130,10 @@ R04 = 4
 
 # === derived constants =======================================================
 L_S_PHO_CL = [S_PROT, S_BIN_C_G, S_BIN_C_3, S_BIN_C_2, S_BIN_C_1]
-D_BC2 = {'A': L_BC2_A,
+D_S_CMP = {S_EQ: S_TXT_EQ, S_L: S_TXT_L, S_G: S_TXT_G, S_LE: S_TXT_LE,
+           S_GE: S_TXT_GE}
+D_BC2 = {'0': [],
+         'A': L_BC2_A,
          'B': L_BC2_B,
          'C': L_BC2_C,
          'D': L_BC2_D,
