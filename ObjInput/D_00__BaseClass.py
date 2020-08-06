@@ -12,7 +12,7 @@ sNmSpec = 'Base class of the D_00__BaseClass class'
 cSep = GC.S_SEP_SEMICOL
 
 # --- filtering /plotting core input ------------------------------------------
-sNumAttr1 = GC.S_I_DVCL_P       # 1st numeric attribute (used as plot property)
+sNumAttr1 = GC.S_I_DVCL_PN      # 1st numeric attribute (used as plot property)
 
 sColAttr1 = GC.S_MET_D          # GC.S_MET_D
 sColAttr2 = GC.S_BIN_C_2        # GC.S_PHO_D / GC.S_BIN_C_2

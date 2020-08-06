@@ -9,39 +9,56 @@ sOType = 'Data filter (D_01__DataFilter)'
 sNmSpec = 'Data filter of the D_01__DataFilter class'
 
 # --- names and paths of files and dirs ---------------------------------------
-sFDat = 'Corr__BinOp_MetD_DvSD_GT0_AllD_PhoD_DvSD_GT0_AllD'
-pRelDatFIn = GC.P_REL_DATF_G
-pRelDatFOut = GC.P_REL_DATF_NX
+lSF = ['Red__Corr__BinOp_MetD_DvSD_GT0_AllD_PhoD_DvSD_GT0_AllD']
+pRelDatFIn = GC.P_REL_IN_DATF
+pRelDatFOut = GC.P_REL_OUT_DATF
 
 # --- filtering ---------------------------------------------------------------
-sSelBC2 = 'G'                   # 'X'; X in {'A',..., 'G'}
-lSNumAttr = [GC.S_I_DVCL_P, GC.S_CORR]  # S_CORR / S_I_DVCL_P / S_I_DVCL_N 
-                                        # S_I_DVCL_PN
-lThrNum = [7.5, 0.5]            # numeric threshold values (attr. in lSNumAttr)
+lSSelBC2 = ['0', 'G']        # 'X'; X in {'A',..., 'G'} or X == '0' (all)
+# headers of columns used for filter
+# lSColFlt = [GC.S_I_DVCL_PN, 'MetD_05', 'PhoD_05']
+# lSColFlt = [GC.S_I_DVCL_PN, 'SpearV', 'SpearP', 'PatternSimilarity']
+lSColFlt = [GC.S_I_DVCL_PN, 'NumSigCcd_05', 'SpearV', 'SpearP', 'PatternEuclDist']
+# threshold values for data in columns used for filter
+# lThrVal = [8.0, 'Y', 'Y']
+# lThrVal = [7.25, 0.5, 0.05, 4]
+lThrVal = [7.25, 1, 0.5, 0.05, 1.5]
+# list of comparison strings ('==', '<', '>', '<=', '>=')
+# lSCmp = [GC.S_GE, GC.S_EQ, GC.S_EQ]
+# lSCmp = [GC.S_GE, GC.S_GE, GC.S_L, GC.S_GE]
+lSCmp = [GC.S_GE, GC.S_GE, GC.S_GE, GC.S_L, GC.S_LE]
 
 selOpETr = GC.S_AVG             # S_AVG / S_MAX (edge trace operation)
 
 # === assertions ==============================================================
-assert len(lThrNum) == len(lSNumAttr)
-iGT = sFDat.find('_' + GC.S_GT)
-assert iGT >= 0
+assert len(lThrVal) == len(lSColFlt) and len(lSCmp) == len(lSColFlt)
+lIGT, nFlt = [s.find('_' + GC.S_GT) for s in lSF], len(lSColFlt)
+for iGT in lIGT:
+    assert iGT >= 0
 
 # === derived values and input processing =====================================
-lBC2Sel = GC.D_BC2[sSelBC2]
-sSelBC2 = GC.S_SEL_BIN_2 + sSelBC2
-sSelGT, sTask2 = sFDat[(iGT + 1):min(iGT + 4, len(sFDat))], ''
-for k, s in enumerate(lSNumAttr):
-    sTask2 += s + '_' + str(lThrNum[k]) + '_'
+sTask2 = ''
+for k, s in enumerate(lSColFlt):
+    sTask2 += s + '_' + GC.D_S_CMP[lSCmp[k]] + str(lThrVal[k]) + '_'
 sTask2 += selOpETr
 sTask2 = sTask2.replace(GC.S_SEP_DOT, GC.S_SEP_P)
-sFDat += ('.' + GC.S_EXT_CSV)
-sFFiltDatS = GC.S_FILT_DAT + '__' + sSelBC2
-sFFiltDatE = sTask2 + '__' + sFDat
 
-dFilt = {GC.S_SEL: {GC.S_BIN_C_2: lBC2Sel},
-         GC.S_THR: {lSNumAttr[k]: ('>=', lThrNum[k]) for k in
-                    range(len(lThrNum))}}
+lSF = [s + '.' + GC.S_EXT_CSV for s in lSF]
+lSGT = [s[(lIGT[k] + 1):min(lIGT[k] + 4, len(s))] for k, s in enumerate(lSF)]
 
+llBC2Sel = [GC.D_BC2[sSelBC2] for sSelBC2 in lSSelBC2]
+lSSelBC2F = [GC.S_ALL_BIN]*len(lSSelBC2)
+for k, sSelBC2 in enumerate(lSSelBC2):
+    if sSelBC2 != '0':
+        lSSelBC2F[k] = GC.S_SEL_BIN_2 + sSelBC2
+    
+dSFFiltS = {(sGT, sSelBC2): GC.S_FILT_DAT + '__' + lSSelBC2F[k] + '_' + sGT
+            for k, sSelBC2 in enumerate(lSSelBC2) for sGT in lSGT}
+
+dDFilt = {sSelBC2: {GC.S_SEL: {GC.S_BIN_C_2: llBC2Sel[k]},
+                    GC.S_THR: {lSColFlt[j]: (lSCmp[j], lThrVal[j]) for j in
+                               range(nFlt)}}
+          for k, sSelBC2 in enumerate(lSSelBC2)}
 
 # === create input dictionary =================================================
 dIO = {# --- general
@@ -51,19 +68,18 @@ dIO = {# --- general
        'pRelDatFIn': pRelDatFIn,
        'pRelDatFOut': pRelDatFOut,
        # --- filtering
-       'sSelBC2': sSelBC2,
-       'lSNumAttr': lSNumAttr,
-       'lThrNum': lThrNum,
+       'lSColFlt': lSColFlt,
+       'lThrVal': lThrVal,
+       'lSCmp': lSCmp,
        'selOpETr': selOpETr,
-       'lBC2Sel': lBC2Sel,
        # === derived values and input processing
-       'lBC2Sel': lBC2Sel,
-       'sSelBC2': sSelBC2,
-       'sSelGT': sSelGT,
        'sTask2': sTask2,
-       'sFDat': sFDat,
-       'sFFiltDatS': sFFiltDatS,
-       'sFFiltDatE': sFFiltDatE,
-       'dFilt': dFilt}
+       'lSF': lSF,
+       'lSGT': lSGT,
+       'llBC2Sel': llBC2Sel,
+       'lSSelBC2': lSSelBC2,
+       'lSSelBC2F': lSSelBC2F,
+       'dSFFiltS': dSFFiltS,
+       'dDFilt': dDFilt}
 
 ###############################################################################
