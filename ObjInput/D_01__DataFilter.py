@@ -9,24 +9,32 @@ sOType = 'Data filter (D_01__DataFilter)'
 sNmSpec = 'Data filter of the D_01__DataFilter class'
 
 # --- names and paths of files and dirs ---------------------------------------
-lSF = ['Red__Corr__BinOp_MetD_DvSD_GT0_AllD_PhoD_DvSD_GT0_AllD']
+lSF = ['Red__Corr__BinOp_MetD_DvSD_GT0_AllD_PhoD_DvSD_GT0_AllD',
+       'Red__Corr__BinOp_MetD_DvSD_GT1_AllD_PhoD_DvSD_GT1_AllD',
+       'Red__Corr__BinOp_MetD_DvSD_GT5_AllD_PhoD_DvSD_GT5_AllD']
 pRelDatFIn = GC.P_REL_IN_DATF
 pRelDatFOut = GC.P_REL_OUT_DATF
 
 # --- filtering ---------------------------------------------------------------
 lSSelBC2 = ['0', 'G']        # 'X'; X in {'A',..., 'G'} or X == '0' (all)
 # headers of columns used for filter
+# lSColFlt = [GC.S_I_DVCL_PN]
 # lSColFlt = [GC.S_I_DVCL_PN, 'MetD_05', 'PhoD_05']
 # lSColFlt = [GC.S_I_DVCL_PN, 'SpearV', 'SpearP', 'PatternSimilarity']
-lSColFlt = [GC.S_I_DVCL_PN, 'NumSigCcd_05', 'SpearV', 'SpearP', 'PatternEuclDist']
+lSColFlt = [GC.S_I_DVCL_PN, 'NumSigCcd_05']
+# lSColFlt = [GC.S_I_DVCL_PN, 'NumSigCcd_05', 'SpearV', 'SpearP', 'PatternEuclDist']
 # threshold values for data in columns used for filter
+# lThrVal = [7.25]
 # lThrVal = [8.0, 'Y', 'Y']
 # lThrVal = [7.25, 0.5, 0.05, 4]
-lThrVal = [7.25, 1, 0.5, 0.05, 1.5]
+lThrVal = [7.25, 2]
+# lThrVal = [7.25, 1, 0.5, 0.05, 1.5]
 # list of comparison strings ('==', '<', '>', '<=', '>=')
+# lSCmp = [GC.S_GE]
 # lSCmp = [GC.S_GE, GC.S_EQ, GC.S_EQ]
 # lSCmp = [GC.S_GE, GC.S_GE, GC.S_L, GC.S_GE]
-lSCmp = [GC.S_GE, GC.S_GE, GC.S_GE, GC.S_L, GC.S_LE]
+lSCmp = [GC.S_GE, GC.S_GE]
+# lSCmp = [GC.S_GE, GC.S_GE, GC.S_GE, GC.S_L, GC.S_LE]
 
 selOpETr = GC.S_AVG             # S_AVG / S_MAX (edge trace operation)
 
