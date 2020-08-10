@@ -26,7 +26,7 @@ def getNodeTrace(dITp, G, dPos, llSAttr, k):
     lS, lCX, lCY, lNCon, _ = SF.getLNodeInfo(dITp, G, dPos, llSAttr, k)
     dClrBar = dict(x = dITp['lClrBarRelX'][k],
                    thickness = dITp['lClrBarThickn'][k],
-                   title = dITp['lClrBarTitle'][k],
+                   title = dITp['lClrBarTitleM'][k],
                    xanchor = dITp['lClrBarXAnch'][k],
                    titleside = dITp['lClrBarTSide'][k])
     dMark = dict(showscale = dITp['lShowScaleNode'][k],
@@ -44,7 +44,7 @@ def getNodeTrace(dITp, G, dPos, llSAttr, k):
 def getTraceLists(dITp, pdDfr):
     G, llSAttr, dPos = SF.constructNetwork(dITp, pdDfr)
     lEdgeTrace = getLEdgeTrace(dITp, G, dPos)
-    GF.modTitleSClrBar(dITp['lSCol'], dITp['lClrBarTitle'])
+    dITp['lClrBarTitleM'] = GF.modSClrBar(dITp['lSCol'], dITp['lClrBarTitle'])
     lNodeTrace = []
     for k in range(len(llSAttr)):
         lNodeTrace.append(getNodeTrace(dITp, G, dPos, llSAttr, k))

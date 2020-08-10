@@ -77,15 +77,17 @@ def splitDfr(pdDfr, tHd, j = 0):
         j += 1
         return [splitDfr(cSubDfr, tHd, j) for cSubDfr in lSubDfr]
 
-def modTitleSClrBar(lSColAttr, lSClrBar):
+def modSClrBar(lSColAttr, lSClrBar):
     assert len(lSColAttr) == len(lSClrBar)
+    lSClrBarM = [s for s in lSClrBar]
     for k, cS in enumerate(lSColAttr):
         if cS == GC.S_MET_D:
-            lSClrBar[k] += (' ' + GC.S_MET_F)
+            lSClrBarM[k] = lSClrBar[k] + ' ' + GC.S_MET_F
         elif cS == GC.S_PHO_D:
-            lSClrBar[k] += (' ' + GC.S_PHO_F)
+            lSClrBarM[k] = lSClrBar[k] + ' ' + GC.S_PHO_F
         else:
-            lSClrBar[k] += (' ' + cS)
+            lSClrBarM[k] = lSClrBar[k] + ' ' + cS
+    return lSClrBarM
 
 def printElapsedTimeSim(stT, cT, sPre = 'Time'):
     # calculate and display elapsed time 
