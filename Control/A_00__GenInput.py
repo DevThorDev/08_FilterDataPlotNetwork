@@ -5,7 +5,7 @@
 import Core.C_00__GenConstants as GC
 
 # --- flow control ------------------------------------------------------------
-doNetworkPlot = True    # True / False (plotting of network data)
+doNetworkPlot = False    # True / False (plotting of network data)
 
 # --- output and debug info ---------------------------------------------------
 levelDebugOut = 2       # level of debug output (0: no debug output)
