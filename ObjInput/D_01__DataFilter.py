@@ -38,6 +38,14 @@ lSCmp = [GC.S_GE, GC.S_GE]
 
 selOpETr = GC.S_AVG             # S_AVG / S_MAX (edge trace operation)
 
+# --- generating lists for comparing genotypes --------------------------------
+lKeyCmpGT_PhoD = [GC.S_MET_D, GC.S_PHO_D, GC.S_BIN_C_2]
+lValCmpGT_PhoD = [GC.S_DV_CL_PN, GC.S_DV_CL_P, GC.S_SPEAR_V, GC.S_SPEAR_P]
+lSrtCmpGT_PhoD = [GC.S_DV_CL_PN, GC.S_DV_CL_P, GC.S_SPEAR_V]
+lKeyCmpGT_BC2 = [GC.S_MET_D, GC.S_BIN_C_2]
+lValCmpGT_BC2 = [GC.S_DV_CL_PN]
+lSrtCmpGT_BC2 = [GC.S_DV_CL_PN]
+
 # === assertions ==============================================================
 assert len(lThrVal) == len(lSColFlt) and len(lSCmp) == len(lSColFlt)
 lIGT, nFlt = [s.find('_' + GC.S_GT) for s in lSF], len(lSColFlt)
@@ -62,6 +70,8 @@ for k, sSelBC2 in enumerate(lSSelBC2):
     
 dSFFiltS = {(sGT, sSelBC2): GC.S_FILT_DAT + '__' + lSSelBC2F[k] + '_' + sGT
             for k, sSelBC2 in enumerate(lSSelBC2) for sGT in lSGT}
+dSFCmpGTS = {sSelBC2: GC.S_COMP_GT + '__' + lSSelBC2F[k] + '_' + '_'.join(lSGT)
+             for k, sSelBC2 in enumerate(lSSelBC2)}
 
 dDFilt = {sSelBC2: {GC.S_SEL: {GC.S_BIN_C_2: llBC2Sel[k]},
                     GC.S_THR: {lSColFlt[j]: (lSCmp[j], lThrVal[j]) for j in
@@ -80,6 +90,13 @@ dIO = {# --- general
        'lThrVal': lThrVal,
        'lSCmp': lSCmp,
        'selOpETr': selOpETr,
+       # --- generating lists for comparing genotypes
+       'lKeyCmpGT_PhoD': lKeyCmpGT_PhoD,
+       'lValCmpGT_PhoD': lValCmpGT_PhoD,
+       'lSrtCmpGT_PhoD': lSrtCmpGT_PhoD,
+       'lKeyCmpGT_BC2': lKeyCmpGT_BC2,
+       'lValCmpGT_BC2': lValCmpGT_BC2,
+       'lSrtCmpGT_BC2': lSrtCmpGT_BC2,
        # === derived values and input processing
        'sTask2': sTask2,
        'lSF': lSF,
@@ -88,6 +105,7 @@ dIO = {# --- general
        'lSSelBC2': lSSelBC2,
        'lSSelBC2F': lSSelBC2F,
        'dSFFiltS': dSFFiltS,
+       'dSFCmpGTS': dSFCmpGTS,
        'dDFilt': dDFilt}
 
 ###############################################################################
