@@ -20,6 +20,13 @@ class DataFilter(BaseClass):
         self.dITp = copy.deepcopy(self.dIG[0])  # type of base class = 0
         for iTpU in lITpUpd + [iTp]:            # updated with types in list
             self.dITp.update(self.dIG[iTpU])
+        self.dITp['lKeyCmpGT'] = self.dITp['lKeyCmpGT_PhoD']
+        self.dITp['lValCmpGT'] = self.dITp['lValCmpGT_PhoD']
+        self.dITp['lSrtCmpGT'] = self.dITp['lSrtCmpGT_PhoD']
+        if self.dITp['sColAttr2'] == GC.S_BIN_C_2:
+            self.dITp['lKeyCmpGT'] = self.dITp['lKeyCmpGT_BC2']
+            self.dITp['lValCmpGT'] = self.dITp['lValCmpGT_BC2']
+            self.dITp['lSrtCmpGT'] = self.dITp['lSrtCmpGT_BC2']
         dSFInp = {(sGT, sSelBC2): self.dITp['lSF'][k]
                   for sSelBC2 in self.dITp['lSSelBC2']
                   for k, sGT in enumerate(self.dITp['lSGT'])}
@@ -27,9 +34,14 @@ class DataFilter(BaseClass):
                                     '_' + self.dITp['sTask1'] + '_' +
                                     self.dITp['sTask2'] + '.' + GC.S_EXT_CSV)
                    for sSelBC2 in self.dITp['lSSelBC2']
-                   for k, sGT in enumerate(self.dITp['lSGT'])}
+                   for sGT in self.dITp['lSGT']}
+        dSFCmpGT = {sSelBC2: (self.dITp['dSFCmpGTS'][sSelBC2] + '_' +
+                              self.dITp['sTask1'] + '_' + self.dITp['sTask2'] +
+                              '.' + GC.S_EXT_CSV)
+                    for sSelBC2 in self.dITp['lSSelBC2']}
         self.addToDITp('dSFInp', dSFInp)
         self.addToDITp('dSFFilt', dSFFilt)
+        self.addToDITp('dSFCmpGT', dSFCmpGT)
         print('Initiated "DataFilter" base object.')
 
     def __str__(self):
@@ -56,6 +68,10 @@ class DataFilter(BaseClass):
                   (sGT, sSelBC2), '.')
             dfrSF.to_csv(pFOut, sep = self.dITp['cSep'])
             dDfrSF[(sGT, sSelBC2)] = dfrSF
+        for sSelBC2, sFCmpGT in self.dITp['dSFCmpGT'].items():
+            dfrCmpGT = SF.compareOverGT(self.dITp, dDfrSF, sSelBC2)
+            pFOut = GF.joinToPath(self.dITp['pRelDatFOut'], sFCmpGT)
+            dfrCmpGT.to_csv(pFOut, sep = self.dITp['cSep'])
         return dDfrSF
 
 ###############################################################################

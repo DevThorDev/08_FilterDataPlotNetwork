@@ -32,6 +32,7 @@ S_OBJINP = 'ObjInput'
 S_OBJINP_PRE = 'D_'
 
 S_FILT_DAT = 'FiltDat'
+S_COMP_GT = 'CompGT'
 S_NETW_PLOT = 'NetworkPlot'
 
 P_REL_G_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
@@ -72,7 +73,33 @@ S_BIN_C_3 = 'BinCode3'
 S_BIN_C_2 = 'BinCode2'
 S_BIN_C_1 = 'BinCode1'
 
+S_CORR_V = 'CorrV'
+S_SPEAR_V = 'SpearV'
+S_KEND_V = 'KendV'
+S_CORR_P = 'CorrP'
+S_SPEAR_P = 'SpearP'
+S_KEND_P = 'KendP'
+S_N_S_CCD_01 = 'NumSigCcd_01'
+S_N_S_CCD_05 = 'NumSigCcd_05'
+S_N_S_CCD_10 = 'NumSigCcd_10'
+S_DV_SC_N = 'DvScN'
+S_DV_SC_P = 'DvScP'
+S_DV_SC_PN = 'DvScPN'
+S_DV_CL_N = 'DvClN'
+S_DV_CL_P = 'DvClP'
+S_DV_CL_PN = 'DvClPN'
+S_P_M_N = 'PmN'
+S_MET_D_01 = 'MetD_01'
+S_MET_D_05 = 'MetD_05'
+S_MET_D_10 = 'MetD_10'
+S_PHO_D_01 = 'PhoD_01'
+S_PHO_D_05 = 'PhoD_05'
+S_PHO_D_10 = 'PhoD_10'
+S_PAT_SIM = 'PatternSimilarity'
+S_PAT_E_DST = 'PatternEuclDist'
+
 S_SRT_FLT = 'SortFilt'
+S_MEAN = 'Sum'
 
 # --- predefined numbers ------------------------------------------------------
 MAX_CLR_VAL = 255

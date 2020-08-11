@@ -35,6 +35,22 @@ def joinDirToPath(pF = '', nmD = 'Directory'):
     else:
         return nmD
 
+def addToDictD(cD, cKMain, cKSub, lV = []):
+    if cKMain in cD:
+        if cKSub not in cD[cKMain]:
+            cD[cKMain][cKSub] = lV
+        else:
+            print('ERROR: Key', cKSub, 'already in', cD[cKMain], '\nlV =', lV)
+            assert False
+    else:
+        cD[cKMain] = {cKSub: lV}
+
+def extractFromDictL(cD):
+    ll = [cD[cK] for cK in sorted(cD)]
+    lLen = [len(l) for l in ll]
+    assert min(lLen) == max(lLen)
+    return [l[k] for k in range(min(lLen)) for l in ll]
+
 def getSClr(cClrC, cMult = GC.MAX_CLR_VAL):
     return str(round(cClrC*cMult))
 
@@ -58,6 +74,34 @@ def readCSV(pF, sepD = ',', iCol = None, dDtype = None, lHStr = [],
             return pdDfr.iloc[iSp:, :], addIDfrT.T
     else:
         return pdDfr
+
+def iniPdDfr(data = None, lSNmC = [], lSNmR = [], shape = (0, 0)):
+    assert len(shape) == 2
+    nR, nC = shape
+    if len(lSNmC) == 0:
+        if len(lSNmR) == 0:
+            if data is None:
+                return pd.DataFrame(np.zeros(shape))
+            else:
+                return pd.DataFrame(data)
+        else:
+            if data is None:
+                return pd.DataFrame(np.zeros((len(lSNmR), nC)), index = lSNmR)
+            else:
+                return pd.DataFrame(data, index = lSNmR)
+    else:
+        if len(lSNmR) == 0:
+            if data is None:
+                return pd.DataFrame(np.zeros((nR, len(lSNmC))),
+                                    columns = lSNmC)
+            else:
+                return pd.DataFrame(data, columns = lSNmC)
+        else:   # ignore nR
+            if data is None:
+                return pd.DataFrame(np.zeros((len(lSNmR), len(lSNmC))),
+                                    index = lSNmR, columns = lSNmC)
+            else:
+                return pd.DataFrame(data, index = lSNmR, columns = lSNmC)
 
 def concPdDfrS(lPdDfr, concAx = 0, verInt = True, srt = False, ignIdx = False,
                dropAx = None):

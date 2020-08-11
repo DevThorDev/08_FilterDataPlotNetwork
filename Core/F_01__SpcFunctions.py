@@ -61,6 +61,33 @@ def sortAndFilter(dITp, pdDfr, sSlBC2):
                                 ignore_index = True)
     return dfrM.dropna(subset = list(dFlt[GC.S_THR]))
 
+def compareOverGT(dITp, dDfr, sSlBC2):
+    dCmpGT, lSMnSrt = {}, [GC.S_MEAN + s for s in dITp['lSrtCmpGT']]
+    lSValX = [s + '_' + sGT for s in dITp['lValCmpGT'] for sGT in dITp['lSGT']]
+    for sGT in dITp['lSGT']:
+        cDfr = dDfr[(sGT, sSlBC2)]
+        for cI in cDfr.index:
+            tKey = tuple(cDfr.loc[cI, dITp['lKeyCmpGT']])
+            lVal = list(cDfr.loc[cI, dITp['lValCmpGT']])
+            GF.addToDictD(dCmpGT, tKey, sGT, lV = lVal)
+    # print('TEMP: dCmpGT:')
+    # for cKMain in dCmpGT:
+    #     print(cKMain, ':', list(dCmpGT[cKMain]))
+    dfrCmpGT = GF.iniPdDfr(lSNmC = dITp['lKeyCmpGT'] + lSMnSrt + lSValX,
+                           lSNmR = range(1, len(dCmpGT) + 1))
+    for (k, (cK, cD)) in enumerate(dCmpGT.items()):
+        dfrCmpGT.loc[k + 1, dITp['lKeyCmpGT']] = cK
+        lMn = [0.]*len(dITp['lSrtCmpGT'])
+        for j in range(len(dITp['lSrtCmpGT'])):
+            i = dITp['lValCmpGT'].index(dITp['lSrtCmpGT'][j])
+            lMn[j] = np.mean([cL[i] for cL in cD.values()])
+        dfrCmpGT.loc[k + 1, lSMnSrt] = lMn
+        print('TEMP: - lSValX =', lSValX, 'len:', len(lSValX))
+        print('TEMP: - list of values set =', GF.extractFromDictL(cD),
+              'len:', len(GF.extractFromDictL(cD)))
+        dfrCmpGT.loc[k + 1, lSValX] = GF.extractFromDictL(cD)
+    return dfrCmpGT.sort_values(by = dITp['lSrtCmpGT'], ascending = False)
+
 # --- Functions (networks) ----------------------------------------------------
 def getInfoFromG(dITp, G, cDfr):
     llA = []
