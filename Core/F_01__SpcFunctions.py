@@ -72,8 +72,8 @@ def compareOverGT(dITp, dDfr, sSlBC2):
             tKey = tuple(cDfr.loc[cI, dITp['lKeyCmpGT']])
             lVal = list(cDfr.loc[cI, dITp['lValCmpGT']])
             GF.addToDictD(dCmpGT, tKey, sGT, lV = lVal)
-            if cI%1000 == 0:
-                print(cI, 'of', cDfr.shape[0], 'lines processed.')
+            if (cI + 1)%10000 == 0:
+                print(cI + 1, 'of', cDfr.shape[0], 'lines processed.')
         print('Calculated genotype comparison dictionary for genotype', sGT)
     dfrCmpGT = GF.iniPdDfr(lSNmC = dITp['lKeyCmpGT'] + lSMnSrt + lSValX,
                            lSNmR = range(1, len(dCmpGT) + 1))
