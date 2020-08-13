@@ -17,10 +17,13 @@ def calcFromCVal(dITp, dFlt, lDfr):
     for k in range(len(tHd) - 1):
         lDfr = GF.flattenIt(lDfr)
     if cOp in [GC.S_MAX, GC.S_AVG]:
-        # get the maximum or average of all values with same tHd-def. columns
+        # get the min/max/average of all values with same tHd-def. columns
         for cDfr in lDfr:
-            if cOp == GC.S_MAX:
-                cDfr = cDfr[cDfr[nK] == max(cDfr[nK])]
+            if cOp in [GC.S_MIN, GC.S_MAX]:
+                if cOp == GC.S_MIN:
+                    cDfr = cDfr[cDfr[nK] == min(cDfr[nK])]
+                else:
+                    cDfr = cDfr[cDfr[nK] == max(cDfr[nK])]
                 if cDfr.shape[0] > 1:
                     cDfr = cDfr.iloc[0, :].to_frame().T
             elif cOp == GC.S_AVG:
