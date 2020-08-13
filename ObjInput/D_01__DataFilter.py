@@ -19,24 +19,27 @@ pRelDatFOut = GC.P_REL_OUT_DATF
 lSSelBC2 = ['0', 'G']        # 'X'; X in {'A',..., 'G'} or X == '0' (all)
 # headers of columns used for filter
 # lSColFlt = [GC.S_I_DVCL_PN]
-lSColFlt = [GC.S_I_DVCL_PN, 'MetD_05', 'PhoD_05']
+# lSColFlt = [GC.S_I_DVCL_PN, 'MetD_05', 'PhoD_05']
+lSColFlt = [GC.S_I_DVCL_PN, 'SpearP', 'MetD_05', 'PhoD_05']
 # lSColFlt = [GC.S_I_DVCL_PN, 'SpearV', 'SpearP', 'PatternSimilarity']
 # lSColFlt = [GC.S_I_DVCL_PN, 'NumSigCcd_05']
 # lSColFlt = [GC.S_I_DVCL_PN, 'NumSigCcd_05', 'SpearV', 'SpearP', 'PatternEuclDist']
 # threshold values for data in columns used for filter
 # lThrVal = [7.25]
-lThrVal = [-16, 'Y', 'Y']
+# lThrVal = [7.25, 'Y', 'Y']
+lThrVal = [7.25, 0.05, 'Y', 'Y']
 # lThrVal = [7.25, 0.5, 0.05, 4]
 # lThrVal = [7.25, 2]
 # lThrVal = [7.25, 1, 0.5, 0.05, 1.5]
 # list of comparison strings ('==', '<', '>', '<=', '>=')
 # lSCmp = [GC.S_GE]
-lSCmp = [GC.S_GE, GC.S_EQ, GC.S_EQ]
+# lSCmp = [GC.S_GE, GC.S_EQ, GC.S_EQ]
+lSCmp = [GC.S_GE, GC.S_L, GC.S_EQ, GC.S_EQ]
 # lSCmp = [GC.S_GE, GC.S_GE, GC.S_L, GC.S_GE]
 # lSCmp = [GC.S_GE, GC.S_GE]
 # lSCmp = [GC.S_GE, GC.S_GE, GC.S_GE, GC.S_L, GC.S_LE]
 
-selOpETr = GC.S_AVG             # S_AVG / S_MAX (edge trace operation)
+selOpETr = GC.S_AVG             # S_MIN / S_MAX / S_AVG (edge trace operation)
 
 # --- generating lists for comparing genotypes --------------------------------
 lKeyCmpGT_PhoD = [GC.S_MET_D, GC.S_PHO_D, GC.S_BIN_C_2]
