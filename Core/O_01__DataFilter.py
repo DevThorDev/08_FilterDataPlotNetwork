@@ -23,10 +23,12 @@ class DataFilter(BaseClass):
         self.dITp['lKeyCmpGT'] = self.dITp['lKeyCmpGT_PhoD']
         self.dITp['lValCmpGT'] = self.dITp['lValCmpGT_PhoD']
         self.dITp['lSrtCmpGT'] = self.dITp['lSrtCmpGT_PhoD']
+        self.dITp['lAscCmpGT'] = self.dITp['lAscCmpGT_PhoD']
         if self.dITp['sColAttr2'] == GC.S_BIN_C_2:
             self.dITp['lKeyCmpGT'] = self.dITp['lKeyCmpGT_BC2']
             self.dITp['lValCmpGT'] = self.dITp['lValCmpGT_BC2']
             self.dITp['lSrtCmpGT'] = self.dITp['lSrtCmpGT_BC2']
+            self.dITp['lAscCmpGT'] = self.dITp['lAscCmpGT_BC2']
         dSFInp = {(sGT, sSelBC2): self.dITp['lSF'][k]
                   for sSelBC2 in self.dITp['lSSelBC2']
                   for k, sGT in enumerate(self.dITp['lSGT'])}

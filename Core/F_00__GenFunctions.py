@@ -45,11 +45,16 @@ def addToDictD(cD, cKMain, cKSub, lV = []):
     else:
         cD[cKMain] = {cKSub: lV}
 
-def extractFromDictL(cD):
-    ll = [cD[cK] for cK in sorted(cD)]
-    lLen = [len(l) for l in ll]
+def extractFromDictL(cD, lKeys):
+    lRet, lLen = [], [len(l) for l in cD.values()]
     assert min(lLen) == max(lLen)
-    return [l[k] for k in range(min(lLen)) for l in ll]
+    for k in range(max(lLen)):
+        for cK in lKeys:
+            if cK in cD:
+                lRet.append(cD[cK][k])
+            else:
+                lRet.append(GC.S_WAVE)
+    return lRet
 
 def getSClr(cClrC, cMult = GC.MAX_CLR_VAL):
     return str(round(cClrC*cMult))

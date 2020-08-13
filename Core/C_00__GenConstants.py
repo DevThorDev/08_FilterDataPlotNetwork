@@ -16,6 +16,7 @@ N_DIG_OBJ_2 = 2
 S_SEP_DOT = '.'
 S_SEP_P = 'p'
 S_SEP_SEMICOL = ';'
+S_WAVE = '~'
 S_EQ = '=='
 S_L = '<'
 S_G = '>'
@@ -99,7 +100,7 @@ S_PAT_SIM = 'PatternSimilarity'
 S_PAT_E_DST = 'PatternEuclDist'
 
 S_SRT_FLT = 'SortFilt'
-S_MEAN = 'Sum'
+S_MEAN = 'Mean'
 
 # --- predefined numbers ------------------------------------------------------
 MAX_CLR_VAL = 255
