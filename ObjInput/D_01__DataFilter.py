@@ -39,7 +39,7 @@ lSCmp = [GC.S_GE, GC.S_L, GC.S_EQ, GC.S_EQ]
 # lSCmp = [GC.S_GE, GC.S_GE]
 # lSCmp = [GC.S_GE, GC.S_GE, GC.S_GE, GC.S_L, GC.S_LE]
 
-selOpETr = GC.S_AVG             # S_MIN / S_MAX / S_AVG (edge trace operation)
+selOpETr = GC.S_MAX             # S_MIN / S_MAX / S_AVG (edge trace operation)
 
 # --- generating lists for comparing genotypes --------------------------------
 lKeyCmpGT_PhoD = [GC.S_MET_D, GC.S_PHO_D, GC.S_BIN_C_2]

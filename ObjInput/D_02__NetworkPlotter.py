@@ -60,24 +60,24 @@ clrBarRelXAttr1 = -0.15
 clrBarRelXAttr2 = 1.02
 clrBarThicknAttr1 = 15
 clrBarThicknAttr2 = 15
-clrBarTitleAttr1 = 'Node Connections of'
-clrBarTitleAttr2 = 'Node Connections of'
+clrBarTitleAttr1 = 'Node connections of'
+clrBarTitleAttr2 = 'Node connections of'
 clrBarXAnchAttr1 = 'left'
 clrBarXAnchAttr2 = 'left'
 clrBarTSideAttr1 = 'right'
 clrBarTSideAttr2 = 'right'
 
 # --- title input -------------------------------------------------------------
-figTitle = ('<br>Network graph: Metabolites and phosphopeptides' +
-            ' (avg. over BinCode2 groups) with similar behaviour (WT)')
-fontSzTitle = 11
+figTitle = ('<br>Network graph: Metabolites and BinCode2 groups ' +
+            'containing phosphopeptides with high concordance')
+fontSzTitle = 10
 showLegTitle = False
 hoverModeTitle = 'closest'
 dMarginTitle = dict(b = 20, l = 5, r = 5, t = 40)
 
 # --- annotations input -------------------------------------------------------
-textAnnot = 'Dark purple'
-textAnnot += ' edge colour corresonds to higher confidence of connection'
+textAnnot = ('Dark purple edge colour corresonds to higher confidence of ' +
+             'connection')
 showArrAnnot = False
 xRefAnnot = 'paper'
 yRefAnnot = 'paper'
