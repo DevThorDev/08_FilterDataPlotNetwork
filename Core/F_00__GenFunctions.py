@@ -131,9 +131,9 @@ def modSClrBar(lSColAttr, lSClrBar):
     lSClrBarM = [s for s in lSClrBar]
     for k, cS in enumerate(lSColAttr):
         if cS == GC.S_MET_D:
-            lSClrBarM[k] = lSClrBar[k] + ' ' + GC.S_MET_F
+            lSClrBarM[k] = lSClrBar[k] + ' ' + GC.S_MET_F_S
         elif cS == GC.S_PHO_D:
-            lSClrBarM[k] = lSClrBar[k] + ' ' + GC.S_PHO_F
+            lSClrBarM[k] = lSClrBar[k] + ' ' + GC.S_PHO_F_S
         else:
             lSClrBarM[k] = lSClrBar[k] + ' ' + cS
     return lSClrBarM

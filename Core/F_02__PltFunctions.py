@@ -50,12 +50,15 @@ def getTraceLists(dITp, pdDfr):
         lNodeTrace.append(getNodeTrace(dITp, G, dPos, llSAttr, k))
     return lEdgeTrace, lNodeTrace
 
-def createFigure(dITp, lEdgeTrace, lNodeTrace):
+def createFigure(dITp, sGT, lEdgeTrace, lNodeTrace):
     lAnnot = [dict(text = dITp['textAnnot'], showarrow = dITp['showArrAnnot'],
                    xref = dITp['xRefAnnot'], yref = dITp['yRefAnnot'],
                    x = dITp['xPosAnnot'], y = dITp['yPosAnnot'])]
+    figTtl = dITp['figTitle']
+    if sGT in GC.D_GT_L:
+        figTtl += ' (' + GC.D_GT_L[sGT] + ')'
     return go.Figure(data = lEdgeTrace + lNodeTrace,
-                     layout = go.Layout(title = dITp['figTitle'],
+                     layout = go.Layout(title = figTtl,
                                         titlefont_size = dITp['fontSzTitle'],
                                         showlegend = dITp['showLegTitle'],
                                         hovermode = dITp['hoverModeTitle'],

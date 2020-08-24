@@ -59,14 +59,24 @@ S_INV = 'inv'
 S_RGB = 'rgb'
 
 S_GT = 'GT'
-S_GT_0 = S_GT + '0'
-S_GT_1 = S_GT + '1'
-S_GT_5 = S_GT + '5'
+S_GT0 = S_GT + '0'
+S_GT1 = S_GT + '1'
+S_GT5 = S_GT + '5'
+
+S_WT_S = 'WT'
+S_PGM_S = 'PGM'
+S_SWEET_S = 'SWEET'
+
+S_WT_L = 'wild type'
+S_PGM_L = 'pgm mutant'
+S_SWEET_L = 'sweet11/12 mutant'
 
 S_MET_D = 'MetD'
 S_PHO_D = 'PhoD'
-S_MET_F = 'Metabolites'
-S_PHO_F = 'Phosphopeptides'
+S_MET_F_S = 'metabolites'
+S_PHO_F_S = 'phosphopeptides'
+S_MET_F_L = 'Metabolites'
+S_PHO_F_L = 'Phosphopeptides'
 
 S_PROT = 'Protein'
 S_BIN_C_G = 'BinCode'
@@ -118,6 +128,14 @@ THR_8 = 8
 THR_9 = 9
 
 K_DIG_RND_04 = 4
+
+# --- predefined dictionaries -------------------------------------------------
+D_GT_S = {S_GT0: S_WT_S,
+          S_GT1: S_PGM_S,
+          S_GT5: S_SWEET_S}
+D_GT_L = {S_GT0: S_WT_L,
+          S_GT1: S_PGM_L,
+          S_GT5: S_SWEET_L}
 
 # --- bin code 2 lists --------------------------------------------------------
 L_BC2_A = ['1.1', '1.3', '5.3', '10.5', '12.1', '12.2', '15.1', '30.11',

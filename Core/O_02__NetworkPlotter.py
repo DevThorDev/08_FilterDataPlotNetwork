@@ -40,7 +40,7 @@ class NetworkPlotter(BaseClass):
     def createSaveFigures(self, dDfrSF):
         for cK, sFNwPlt in self.dITp['dSFNwPlt'].items():
             lEdgeTrace, lNodeTrace = PF.getTraceLists(self.dITp, dDfrSF[cK])
-            fig = PF.createFigure(self.dITp, lEdgeTrace, lNodeTrace)
+            fig = PF.createFigure(self.dITp, cK[0], lEdgeTrace, lNodeTrace)
             fig.write_image(GF.joinToPath(self.dITp['pRelPltF'], sFNwPlt))
 
 ###############################################################################
