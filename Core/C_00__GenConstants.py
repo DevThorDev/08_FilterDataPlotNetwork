@@ -37,7 +37,7 @@ S_COMP_GT = 'CompGT'
 S_NETW_PLOT = 'NetworkPlot'
 
 P_REL_G_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
-                            '21_R_81_BinaryOps')
+                            '11_ResultCSV_GT015', '21_R_81_BinaryOps')
 P_REL_IN_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
                              '92_Networkx', '00_BO_Input')
 P_REL_OUT_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
