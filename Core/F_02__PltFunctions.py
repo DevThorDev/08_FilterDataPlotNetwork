@@ -41,7 +41,7 @@ def getNodeTrace(dITp, G, dPos, llSAttr, k):
                            color = dITp['lClrTxtNode'][k])
     return nodeTr
 
-def getTraceLists(dITp, pdDfr):
+def getLTrace(dITp, pdDfr):
     G, llSAttr, dPos = SF.constructNetwork(dITp, pdDfr)
     lEdgeTrace = getLEdgeTrace(dITp, G, dPos)
     dITp['lClrBarTitleM'] = GF.modSClrBar(dITp['lSCol'], dITp['lClrBarTitle'])

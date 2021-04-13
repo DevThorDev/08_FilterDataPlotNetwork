@@ -32,14 +32,18 @@ class DataFilter(BaseClass):
         dSFInp = {(sGT, sSelBC2): self.dITp['lSF'][k]
                   for sSelBC2 in self.dITp['lSSelBC2']
                   for k, sGT in enumerate(self.dITp['lSGT'])}
-        dSFFilt = {(sGT, sSelBC2): (self.dITp['dSFFiltS'][(sGT, sSelBC2)] +
-                                    '_' + self.dITp['sTask1'] + '_' +
-                                    self.dITp['sTask2'] + '.' + GC.S_EXT_CSV)
+        dSFFilt = {(sGT, sSelBC2, sSelOp):
+                   (self.dITp['dSFFiltS'][(sGT, sSelBC2)] + GC.S_USC +
+                    self.dITp['sTask1'] + GC.S_USC + self.dITp['sTask2'] +
+                   sSelOp + GC.S_SEP_DOT + GC.S_EXT_CSV)
+                   for sSelOp in self.dITp['lSelOpETr']
                    for sSelBC2 in self.dITp['lSSelBC2']
                    for sGT in self.dITp['lSGT']}
-        dSFCmpGT = {sSelBC2: (self.dITp['dSFCmpGTS'][sSelBC2] + '_' +
-                              self.dITp['sTask1'] + '_' + self.dITp['sTask2'] +
-                              '.' + GC.S_EXT_CSV)
+        dSFCmpGT = {(sSelBC2, sSelOp):
+                    (self.dITp['dSFCmpGTS'][sSelBC2] + GC.S_USC +
+                     self.dITp['sTask1'] + GC.S_USC + self.dITp['sTask2'] +
+                     sSelOp + GC.S_SEP_DOT + GC.S_SEP_DOT + GC.S_EXT_CSV)
+                    for sSelOp in self.dITp['lSelOpETr']
                     for sSelBC2 in self.dITp['lSSelBC2']}
         self.addToDITp('dSFInp', dSFInp)
         self.addToDITp('dSFFilt', dSFFilt)
@@ -57,21 +61,24 @@ class DataFilter(BaseClass):
     
     def filterDataFrames(self):
         dDfrSF = {}
-        for ((sGT, sSelBC2), sFFilt) in self.dITp['dSFFilt'].items():
+        for ((sGT, sSelBC2, sSelOp), sFFilt) in self.dITp['dSFFilt'].items():
             pFIn = GF.joinToPath(self.dITp['pRelDatFIn'],
                                  self.dITp['dSFInp'][(sGT, sSelBC2)])
+            print('TEMP - pFIn =', pFIn)
             dfrIn = pd.read_csv(pFIn, sep = self.dITp['cSep'])
+            if dfrIn.shape[0] == 0:
+                break
             tCA = (self.dITp['sColAttr1'], self.dITp['sColAttr2'])
             tNACA = (self.dITp['sNumAttr1'], tCA)
-            self.dITp['dDFilt'][sSelBC2][self.dITp['selOpETr']] = tNACA
-            dfrSF = SF.sortAndFilter(self.dITp, dfrIn, sSelBC2)
+            self.dITp['dDFilt'][sSelBC2][sSelOp] = tNACA
+            dfrSF = SF.sortAndFilter(self.dITp, dfrIn, sSelBC2, sSelOp)
             pFOut = GF.joinToPath(self.dITp['pRelDatFOut'], sFFilt)
             print(dfrSF.shape[0], 'lines has filtered data frame with key',
-                  (sGT, sSelBC2), '.')
+                  (sGT, sSelBC2, sSelOp), '.')
             dfrSF.to_csv(pFOut, sep = self.dITp['cSep'])
-            dDfrSF[(sGT, sSelBC2)] = dfrSF
-        for sSelBC2, sFCmpGT in self.dITp['dSFCmpGT'].items():
-            dfrCmpGT = SF.compareOverGT(self.dITp, dDfrSF, sSelBC2)
+            dDfrSF[(sGT, sSelBC2, sSelOp)] = dfrSF
+        for ((sSelBC2, sSelOp), sFCmpGT) in self.dITp['dSFCmpGT'].items():
+            dfrCmpGT = SF.compareOverGT(self.dITp, dDfrSF, sSelBC2, sSelOp)
             pFOut = GF.joinToPath(self.dITp['pRelDatFOut'], sFCmpGT)
             dfrCmpGT.to_csv(pFOut, sep = self.dITp['cSep'])
         return dDfrSF

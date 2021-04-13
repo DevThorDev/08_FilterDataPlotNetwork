@@ -10,30 +10,30 @@ import Core.C_00__GenConstants as GC
 import Core.F_00__GenFunctions as GF
 
 # --- Functions (filtering) ---------------------------------------------------
-def calcFromCVal(dITp, dFlt, lDfr):
-    cOp, lDfrR = dITp['selOpETr'], []
-    nK, tHd = dFlt[cOp]
+def calcFromCVal(dITp, dFlt, lDfr, sSlOp):
+    lDfrR = []
+    nK, tHd = dFlt[sSlOp]
     # flatten the possibly nested list of DataFrames first
     for k in range(len(tHd) - 1):
         lDfr = GF.flattenIt(lDfr)
-    if cOp in [GC.S_MAX, GC.S_AVG]:
+    if sSlOp in [GC.S_MAX, GC.S_AVG]:
         # get the min/max/average of all values with same tHd-def. columns
         for cDfr in lDfr:
-            if cOp in [GC.S_MIN, GC.S_MAX]:
-                if cOp == GC.S_MIN:
+            if sSlOp in [GC.S_MIN, GC.S_MAX]:
+                if sSlOp == GC.S_MIN:
                     cDfr = cDfr[cDfr[nK] == min(cDfr[nK])]
                 else:
                     cDfr = cDfr[cDfr[nK] == max(cDfr[nK])]
                 if cDfr.shape[0] > 1:
                     cDfr = cDfr.iloc[0, :].to_frame().T
-            elif cOp == GC.S_AVG:
+            elif sSlOp == GC.S_AVG:
                 cDfr.loc[:, nK] = round(np.mean(cDfr[nK]), GC.K_DIG_RND_04)
                 cDfr = cDfr.iloc[0, :].to_frame().T
             lDfrR.append(cDfr)
         return GF.concPdDfrS(lDfrR, ignIdx = True)
 
-def sortAndFilter(dITp, pdDfr, sSlBC2):
-    cOp, dSrt, dFlt = dITp['selOpETr'], dITp['dSort'], dITp['dDFilt'][sSlBC2]
+def sortAndFilter(dITp, pdDfr, sSlBC2, sSlOp):
+    dSrt, dFlt = dITp['dSort'], dITp['dDFilt'][sSlBC2]
     dfrM = pdDfr.copy()
     if dFlt is not None:
         if GC.S_SEL in dFlt:       # filter based on list of attributes
@@ -56,21 +56,30 @@ def sortAndFilter(dITp, pdDfr, sSlBC2):
                     dfrM = dfrM[dfrM[sCN] >= cThr].reset_index(drop = True)
                 else:
                     print('ERROR: Operation "', sCmp, '" not implemented.')
-        if cOp in dFlt:
+        if sSlOp in dFlt:
             # max. / avg. over all entries with the same col. header key tuple
-            dfrM = calcFromCVal(dITp, dFlt, GF.splitDfr(dfrM, dFlt[cOp][1]))
+            lDfr = GF.splitDfr(dfrM, dFlt[sSlOp][1])
+            # print('TEMP - dfrM:\n', dfrM)
+            # print('TEMP - dFlt:\n', dFlt)
+            # print('TEMP - dFlt[', sSlOp, '] =', dFlt[sSlOp])
+            # print('TEMP - lDfr:')
+            # for cDfr in lDfr:
+            #     print(cDfr)
+            # print('TEMP - END.')
+            dfrM = calcFromCVal(dITp, dFlt, lDfr, sSlOp)
     if dSrt is not None:
         dfrM = dfrM.sort_values(list(dSrt), ascending = list(dSrt.values()),
                                 ignore_index = True)
     return dfrM.dropna(subset = list(dFlt[GC.S_THR]))
 
-def compareOverGT(dITp, dDfr, sSlBC2):
+def compareOverGT(dITp, dDfr, sSlBC2, sSlOp):
     print('Calculating genotype comparison file...')
     dCmpGT, lSMnSrt = {}, [GC.S_MEAN + s for s in dITp['lSrtCmpGT']]
-    lSValX = [s + '_' + sGT for s in dITp['lValCmpGT'] for sGT in dITp['lSGT']]
+    lSValX = [s + GC.S_USC + sGT for s in dITp['lValCmpGT'] for
+              sGT in dITp['lSGT']]
     print('Calculating genotype comparison dictionary for selection', sSlBC2)
     for sGT in dITp['lSGT']:
-        cDfr = dDfr[(sGT, sSlBC2)]
+        cDfr = dDfr[(sGT, sSlBC2, sSlOp)]
         for cI in cDfr.index:
             tKey = tuple(cDfr.loc[cI, dITp['lKeyCmpGT']])
             lVal = list(cDfr.loc[cI, dITp['lValCmpGT']])
