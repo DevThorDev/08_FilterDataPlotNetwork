@@ -59,13 +59,6 @@ def sortAndFilter(dITp, pdDfr, sSlBC2, sSlOp):
         if sSlOp in dFlt:
             # max. / avg. over all entries with the same col. header key tuple
             lDfr = GF.splitDfr(dfrM, dFlt[sSlOp][1])
-            # print('TEMP - dfrM:\n', dfrM)
-            # print('TEMP - dFlt:\n', dFlt)
-            # print('TEMP - dFlt[', sSlOp, '] =', dFlt[sSlOp])
-            # print('TEMP - lDfr:')
-            # for cDfr in lDfr:
-            #     print(cDfr)
-            # print('TEMP - END.')
             dfrM = calcFromCVal(dITp, dFlt, lDfr, sSlOp)
     if dSrt is not None:
         dfrM = dfrM.sort_values(list(dSrt), ascending = list(dSrt.values()),

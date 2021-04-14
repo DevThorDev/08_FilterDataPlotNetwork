@@ -4,10 +4,6 @@
 ###############################################################################
 import os
 
-# --- filter ------------------------------------------------------------------
-S_ALL_BIN = 'AllBins'
-S_SEL_BIN_2 = 'SelBin2s'
-
 # --- general -----------------------------------------------------------------
 N_DIG_OBJ_2 = 2
 S_SEP_DOT = '.'
@@ -37,8 +33,6 @@ S_NETW_PLOT = 'NetworkPlot'
 
 P_REL_G_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
                             '80_ResultsCSV_Proc', '81_BinaryOps')
-# P_REL_IN_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
-#                              '92_Networkx', '00_BO_Input')
 P_REL_IN_DATF = P_REL_G_DATF
 P_REL_OUT_DATF = os.path.join('..', '..', '12_SysBio02_DataAnalysis',
                               '92_Networkx', '01_Data')
@@ -54,6 +48,9 @@ S_EXT_CSV = 'csv'
 S_EXT_PDF = 'pdf'
 
 # --- predefined strings ------------------------------------------------------
+S_ALL_BIN = 'AllBins'
+S_SEL_BIN_2 = 'SelBin2s'
+
 S_SEL = 'sel'
 S_THR = 'thr'
 S_MIN = 'min'
@@ -94,9 +91,6 @@ S_KEND_V = 'KendV'
 S_CORR_P = 'CorrP'
 S_SPEAR_P = 'SpearP'
 S_KEND_P = 'KendP'
-# S_N_S_CCD_01 = 'NumSigCcd_01'
-# S_N_S_CCD_05 = 'NumSigCcd_05'
-# S_N_S_CCD_10 = 'NumSigCcd_10'
 S_N_S_CCD_05 = 'NumSigCcd__SigKW_05'
 S_DV_SC_N = 'DvSc_Neg'
 S_DV_SC_P = 'DvSc_Pos'
@@ -105,12 +99,6 @@ S_CI_N = 'CI_Neg'
 S_CI_P = 'CI_Pos'
 S_CI_PN = 'CI_PpN'
 S_OCC_CI_P_M_N = 'sumOccCI_PmN'
-# S_MET_D_01 = 'MetD_01'
-# S_MET_D_05 = 'MetD_05'
-# S_MET_D_10 = 'MetD_10'
-# S_PHO_D_01 = 'PhoD_01'
-# S_PHO_D_05 = 'PhoD_05'
-# S_PHO_D_10 = 'PhoD_10'
 S_MET_D_KW_05 = 'MetD__SigKW_05'
 S_PHO_D_KW_05 = 'PhoD__SigKW_05'
 S_PAT_SIM = 'PatternSimilarity'
@@ -143,6 +131,11 @@ D_GT_S = {S_GT0: S_WT_S,
 D_GT_L = {S_GT0: S_WT_L,
           S_GT1: S_PGM_L,
           S_GT5: S_SWEET_L}
+D_DTYPE = {S_PROT: 'string',
+           S_BIN_C_G: 'string',
+           S_BIN_C_3: 'string',
+           S_BIN_C_2: 'string',
+           S_BIN_C_1: 'string'}
 
 # --- bin code 2 lists --------------------------------------------------------
 L_BC2_A = ['1.1', '1.3', '5.3', '10.5', '12.1', '12.2', '15.1', '30.11',

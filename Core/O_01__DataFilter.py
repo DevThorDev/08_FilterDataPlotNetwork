@@ -42,7 +42,7 @@ class DataFilter(BaseClass):
         dSFCmpGT = {(sSelBC2, sSelOp):
                     (self.dITp['dSFCmpGTS'][sSelBC2] + GC.S_USC +
                      self.dITp['sTask1'] + GC.S_USC + self.dITp['sTask2'] +
-                     sSelOp + GC.S_SEP_DOT + GC.S_SEP_DOT + GC.S_EXT_CSV)
+                     sSelOp + GC.S_SEP_DOT + GC.S_EXT_CSV)
                     for sSelOp in self.dITp['lSelOpETr']
                     for sSelBC2 in self.dITp['lSSelBC2']}
         self.addToDITp('dSFInp', dSFInp)
@@ -58,16 +58,13 @@ class DataFilter(BaseClass):
     def printDType(self):
         print('-'*20, 'Type dictionary:', '-'*20)
         pprint.pprint(self.dITp)
-    
+
     def filterDataFrames(self):
-        dDfrSF = {}
+        dDfrSF, dDTp = {}, GC.D_DTYPE
         for ((sGT, sSelBC2, sSelOp), sFFilt) in self.dITp['dSFFilt'].items():
             pFIn = GF.joinToPath(self.dITp['pRelDatFIn'],
                                  self.dITp['dSFInp'][(sGT, sSelBC2)])
-            print('TEMP - pFIn =', pFIn)
-            dfrIn = pd.read_csv(pFIn, sep = self.dITp['cSep'])
-            if dfrIn.shape[0] == 0:
-                break
+            dfrIn = pd.read_csv(pFIn, sep = self.dITp['cSep'], dtype = dDTp)
             tCA = (self.dITp['sColAttr1'], self.dITp['sColAttr2'])
             tNACA = (self.dITp['sNumAttr1'], tCA)
             self.dITp['dDFilt'][sSelBC2][sSelOp] = tNACA

@@ -17,8 +17,7 @@ sNumAttr1 = GC.S_CI_PN          # 1st numeric attribute (used as plot property)
 sColAttr1 = GC.S_MET_D          # GC.S_MET_D
 sColAttr2 = GC.S_BIN_C_2        # GC.S_PHO_D / GC.S_BIN_C_2
 
-# lSelOpETr = [GC.S_AVG, GC.S_MAX]    # operations on filtered data
-lSelOpETr = [GC.S_AVG]    # operations on filtered data
+lSelOpETr = [GC.S_AVG, GC.S_MAX]    # operations on filtered data
 
 # --- sorting -----------------------------------------------------------------
 dSort = {sColAttr1: True,       # column header (string 1): ascending (bool)

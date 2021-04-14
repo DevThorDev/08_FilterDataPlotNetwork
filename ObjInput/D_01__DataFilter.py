@@ -16,10 +16,45 @@ pRelDatFOut = GC.P_REL_OUT_DATF
 # --- selected bin codes (BinCode2)
 lSSelBC2 = ['0', 'H']        # 'X'; X in {'A',..., 'H'} or X == '0' (all)
 # --- dictionary containing filter conditions
-dFltCnd = {'F1': (GC.S_CI_PN, '>=', 7.25),
-           'F2': (GC.S_SPEAR_P, '<', 0.05),
-           'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
-           'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+# CI_PpN_7p25
+dFltCnd_1F_CI_PpN_7p25 = {'F1': (GC.S_CI_PN, '>=', 7.25)}
+dFltCnd_3F_CI_PpN_7p25 = {'F1': (GC.S_CI_PN, '>=', 7.25),
+                          'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
+                          'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
+dFltCnd_4F_CI_PpN_7p25 = {'F1': (GC.S_CI_PN, '>=', 7.25),
+                          'F2': (GC.S_SPEAR_P, '<', 0.05),
+                          'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
+                          'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+# CI_PpN_6p0
+dFltCnd_1F_CI_PpN_6p0 = {'F1': (GC.S_CI_PN, '>=', 6.0)}
+dFltCnd_3F_CI_PpN_6p0 = {'F1': (GC.S_CI_PN, '>=', 6.0),
+                         'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
+                         'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
+dFltCnd_4F_CI_PpN_6p0 = {'F1': (GC.S_CI_PN, '>=', 6.0),
+                         'F2': (GC.S_SPEAR_P, '<', 0.05),
+                         'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
+                         'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+# CI_P_7p25
+dFltCnd_1F_CI_P_7p25 = {'F1': (GC.S_CI_P, '>=', 7.25)}
+dFltCnd_3F_CI_P_7p25 = {'F1': (GC.S_CI_P, '>=', 7.25),
+                        'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
+                        'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
+dFltCnd_4F_CI_P_7p25 = {'F1': (GC.S_CI_P, '>=', 7.25),
+                        'F2': (GC.S_SPEAR_P, '<', 0.05),
+                        'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
+                        'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+# CI_P_6p0
+dFltCnd_1F_CI_P_6p0 = {'F1': (GC.S_CI_P, '>=', 6.0)}
+dFltCnd_3F_CI_P_6p0 = {'F1': (GC.S_CI_P, '>=', 6.0),
+                       'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
+                       'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
+dFltCnd_4F_CI_P_6p0 = {'F1': (GC.S_CI_P, '>=', 6.0),
+                       'F2': (GC.S_SPEAR_P, '<', 0.05),
+                       'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
+                       'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+
+dFltCnd = dFltCnd_4F_CI_P_6p0
+
 # headers of columns used for filter
 # lSColFlt = [GC.S_CI_PN]
 # lSColFlt = [GC.S_CI_PN, GC.S_MET_D_KW_05, GC.S_PHO_D_KW_05]
@@ -41,8 +76,6 @@ dFltCnd = {'F1': (GC.S_CI_PN, '>=', 7.25),
 # lSCmp = [GC.S_GE, GC.S_GE, GC.S_L, GC.S_GE]
 # lSCmp = [GC.S_GE, GC.S_GE]
 # lSCmp = [GC.S_GE, GC.S_GE, GC.S_GE, GC.S_L, GC.S_LE]
-
-# selOpETr = GC.S_MAX             # S_MIN / S_MAX / S_AVG (edge trace operation)
 
 # --- generating lists for comparing genotypes --------------------------------
 lKeyCmpGT_PhoD = [GC.S_MET_D, GC.S_PHO_D, GC.S_BIN_C_2]
@@ -75,7 +108,7 @@ lSSelBC2F = [GC.S_ALL_BIN]*len(lSSelBC2)
 for k, sSelBC2 in enumerate(lSSelBC2):
     if sSelBC2 != '0':
         lSSelBC2F[k] = GC.S_SEL_BIN_2 + sSelBC2
-    
+
 dSFFiltS = {(sGT, sSelBC2): (GC.S_FILT_DAT + GC.S_2USC + lSSelBC2F[k] +
                              GC.S_USC + sGT)
             for k, sSelBC2 in enumerate(lSSelBC2) for sGT in lSGT}
@@ -96,10 +129,6 @@ dIO = {# --- general
        'pRelDatFOut': pRelDatFOut,
        # --- filtering
        'dFltCnd': dFltCnd,
-       # 'lSColFlt': lSColFlt,
-       # 'lThrVal': lThrVal,
-       # 'lSCmp': lSCmp,
-       # 'selOpETr': selOpETr,
        # --- generating lists for comparing genotypes
        'lKeyCmpGT_PhoD': lKeyCmpGT_PhoD,
        'lValCmpGT_PhoD': lValCmpGT_PhoD,
