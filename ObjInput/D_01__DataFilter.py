@@ -16,52 +16,52 @@ pRelDatFOut = GC.P_REL_OUT_DATF
 # --- selected bin codes (BinCode2)
 lSSelBC2 = ['0', 'H']        # 'X'; X in {'A',..., 'H'} or X == '0' (all)
 # --- dictionary containing filter conditions
-# CI_PpN_7p25
-dFltCnd_1F_CI_PpN_7p25 = {'F1': (GC.S_CI_PN, '>=', 7.25)}
-dFltCnd_3F_CI_PpN_7p25 = {'F1': (GC.S_CI_PN, '>=', 7.25),
-                          'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
-                          'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
-dFltCnd_4F_CI_PpN_7p25 = {'F1': (GC.S_CI_PN, '>=', 7.25),
-                          'F2': (GC.S_SPEAR_P, '<', 0.05),
-                          'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
-                          'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
-# CI_PpN_6p0
-dFltCnd_1F_CI_PpN_6p0 = {'F1': (GC.S_CI_PN, '>=', 6.0)}
-dFltCnd_3F_CI_PpN_6p0 = {'F1': (GC.S_CI_PN, '>=', 6.0),
-                         'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
-                         'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
-dFltCnd_4F_CI_PpN_6p0 = {'F1': (GC.S_CI_PN, '>=', 6.0),
-                         'F2': (GC.S_SPEAR_P, '<', 0.05),
-                         'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
-                         'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
-# CI_P_7p25
-dFltCnd_1F_CI_P_7p25 = {'F1': (GC.S_CI_P, '>=', 7.25)}
-dFltCnd_3F_CI_P_7p25 = {'F1': (GC.S_CI_P, '>=', 7.25),
+# IC_7p25
+dFltCnd_1F_IC_7p25 = {'F1': (GC.S_IC, '>=', 7.25)}
+dFltCnd_3F_IC_7p25 = {'F1': (GC.S_IC, '>=', 7.25),
+                      'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
+                      'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
+dFltCnd_4F_IC_7p25 = {'F1': (GC.S_IC, '>=', 7.25),
+                      'F2': (GC.S_SPEAR_P, '<', 0.05),
+                      'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
+                      'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+# IC_6p0
+dFltCnd_1F_IC_6p0 = {'F1': (GC.S_IC, '>=', 6.0)}
+dFltCnd_3F_IC_6p0 = {'F1': (GC.S_IC, '>=', 6.0),
+                     'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
+                     'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
+dFltCnd_4F_IC_6p0 = {'F1': (GC.S_IC, '>=', 6.0),
+                     'F2': (GC.S_SPEAR_P, '<', 0.05),
+                     'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
+                     'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
+# IC_P_7p25
+dFltCnd_1F_IC_P_7p25 = {'F1': (GC.S_IC_P, '>=', 7.25)}
+dFltCnd_3F_IC_P_7p25 = {'F1': (GC.S_IC_P, '>=', 7.25),
                         'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
                         'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
-dFltCnd_4F_CI_P_7p25 = {'F1': (GC.S_CI_P, '>=', 7.25),
+dFltCnd_4F_IC_P_7p25 = {'F1': (GC.S_IC_P, '>=', 7.25),
                         'F2': (GC.S_SPEAR_P, '<', 0.05),
                         'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
                         'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
-# CI_P_6p0
-dFltCnd_1F_CI_P_6p0 = {'F1': (GC.S_CI_P, '>=', 6.0)}
-dFltCnd_3F_CI_P_6p0 = {'F1': (GC.S_CI_P, '>=', 6.0),
+# IC_P_6p0
+dFltCnd_1F_IC_P_6p0 = {'F1': (GC.S_IC_P, '>=', 6.0)}
+dFltCnd_3F_IC_P_6p0 = {'F1': (GC.S_IC_P, '>=', 6.0),
                        'F2': (GC.S_MET_D_KW_05, '==', 'Y'),
                        'F3': (GC.S_PHO_D_KW_05, '==', 'Y')}
-dFltCnd_4F_CI_P_6p0 = {'F1': (GC.S_CI_P, '>=', 6.0),
+dFltCnd_4F_IC_P_6p0 = {'F1': (GC.S_IC_P, '>=', 6.0),
                        'F2': (GC.S_SPEAR_P, '<', 0.05),
                        'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
                        'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
 
-dFltCnd = dFltCnd_4F_CI_P_6p0
+dFltCnd = dFltCnd_4F_IC_7p25
 
 # headers of columns used for filter
-# lSColFlt = [GC.S_CI_PN]
-# lSColFlt = [GC.S_CI_PN, GC.S_MET_D_KW_05, GC.S_PHO_D_KW_05]
-# lSColFlt = [GC.S_CI_PN, GC.S_SPEAR_P, GC.S_MET_D_KW_05, GC.S_PHO_D_KW_05]
-# lSColFlt = [GC.S_CI_PN, GC.S_SPEAR_V, GC.S_SPEAR_P, GC.S_PAT_SIM]
-# lSColFlt = [GC.S_CI_PN, GC.S_N_S_CCD_05]
-# lSColFlt = [GC.S_CI_PN, GC.S_N_S_CCD_05, GC.S_SPEAR_V, GC.S_SPEAR_P, GC.S_PAT_E_DST]
+# lSColFlt = [GC.S_IC]
+# lSColFlt = [GC.S_IC, GC.S_MET_D_KW_05, GC.S_PHO_D_KW_05]
+# lSColFlt = [GC.S_IC, GC.S_SPEAR_P, GC.S_MET_D_KW_05, GC.S_PHO_D_KW_05]
+# lSColFlt = [GC.S_IC, GC.S_SPEAR_V, GC.S_SPEAR_P, GC.S_PAT_SIM]
+# lSColFlt = [GC.S_IC, GC.S_N_S_CCD_05]
+# lSColFlt = [GC.S_IC, GC.S_N_S_CCD_05, GC.S_SPEAR_V, GC.S_SPEAR_P, GC.S_PAT_E_DST]
 # threshold values for data in columns used for filter
 # lThrVal = [7.25]
 # lThrVal = [7.25, 'Y', 'Y']
@@ -79,12 +79,12 @@ dFltCnd = dFltCnd_4F_CI_P_6p0
 
 # --- generating lists for comparing genotypes --------------------------------
 lKeyCmpGT_PhoD = [GC.S_MET_D, GC.S_PHO_D, GC.S_BIN_C_2]
-lValCmpGT_PhoD = [GC.S_CI_PN, GC.S_DV_SC_P, GC.S_SPEAR_V, GC.S_SPEAR_P]
-lSrtCmpGT_PhoD = [GC.S_CI_PN, GC.S_DV_SC_P, GC.S_SPEAR_V]
+lValCmpGT_PhoD = [GC.S_IC, GC.S_DV_SC_P, GC.S_SPEAR_V, GC.S_SPEAR_P]
+lSrtCmpGT_PhoD = [GC.S_IC, GC.S_DV_SC_P, GC.S_SPEAR_V]
 lAscCmpGT_PhoD = [False, False, False]
 lKeyCmpGT_BC2 = [GC.S_MET_D, GC.S_BIN_C_2]
-lValCmpGT_BC2 = [GC.S_CI_PN]
-lSrtCmpGT_BC2 = [GC.S_CI_PN]
+lValCmpGT_BC2 = [GC.S_IC]
+lSrtCmpGT_BC2 = [GC.S_IC]
 lAscCmpGT_BC2 = [False]
 
 # === assertions ==============================================================

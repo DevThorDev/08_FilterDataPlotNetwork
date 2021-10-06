@@ -44,7 +44,8 @@ def getNodeTrace(dITp, G, dPos, llSAttr, k):
 def getLTrace(dITp, pdDfr):
     G, llSAttr, dPos = SF.constructNetwork(dITp, pdDfr)
     lEdgeTrace = getLEdgeTrace(dITp, G, dPos)
-    dITp['lClrBarTitleM'] = GF.modSClrBar(dITp['lSCol'], dITp['lClrBarTitle'])
+    dITp['lClrBarTitleM'] = GF.modSClrBar(dITp['lSClrBarTxt'],
+                                          dITp['lClrBarTitle'])
     lNodeTrace = []
     for k in range(len(llSAttr)):
         lNodeTrace.append(getNodeTrace(dITp, G, dPos, llSAttr, k))
@@ -55,7 +56,7 @@ def createFigure(dITp, sGT, lEdgeTrace, lNodeTrace):
                    xref = dITp['xRefAnnot'], yref = dITp['yRefAnnot'],
                    x = dITp['xPosAnnot'], y = dITp['yPosAnnot'])]
     figTtl = dITp['figTitle']
-    if sGT in GC.D_GT_L:
+    if sGT in GC.D_GT_L and figTtl is not None:
         figTtl += ' (' + GC.D_GT_L[sGT] + ')'
     return go.Figure(data = lEdgeTrace + lNodeTrace,
                      layout = go.Layout(title = figTtl,

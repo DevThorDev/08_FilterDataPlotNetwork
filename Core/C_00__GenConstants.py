@@ -84,6 +84,7 @@ S_BIN_C_G = 'BinCodeFull'
 S_BIN_C_3 = 'BinCode3Dig'
 S_BIN_C_2 = 'BinCode2Dig'
 S_BIN_C_1 = 'BinCode1Dig'
+S_BIN_LC = 'bin'
 
 S_CORR_V = 'CorrV'
 S_SPEAR_V = 'SpearV'
@@ -95,10 +96,10 @@ S_N_S_CCD_05 = 'NumSigCcd__SigKW_05'
 S_DV_SC_N = 'DvSc_Neg'
 S_DV_SC_P = 'DvSc_Pos'
 S_DV_SC_PN = 'DvSc_PpN'
-S_CI_N = 'CI_Neg'
-S_CI_P = 'CI_Pos'
-S_CI_PN = 'CI_PpN'
-S_OCC_CI_P_M_N = 'sumOccCI_PmN'
+S_IC = 'IC'
+S_IC_N = S_IC + S_USC + 'Neg'
+S_IC_P = S_IC + S_USC + 'Pos'
+S_OCC_IC_P_M_N = 'sumOccIC_PmN'
 S_MET_D_KW_05 = 'MetD__SigKW_05'
 S_PHO_D_KW_05 = 'PhoD__SigKW_05'
 S_PAT_SIM = 'PatternSimilarity'
@@ -135,7 +136,8 @@ D_DTYPE = {S_PROT: 'string',
            S_BIN_C_G: 'string',
            S_BIN_C_3: 'string',
            S_BIN_C_2: 'string',
-           S_BIN_C_1: 'string'}
+           S_BIN_C_1: 'string',
+           S_BIN_LC: 'string'}
 
 # --- bin code 2 lists --------------------------------------------------------
 L_BC2_A = ['1.1', '1.3', '5.3', '10.5', '12.1', '12.2', '15.1', '30.11',

@@ -68,16 +68,18 @@ clrBarTSideAttr1 = 'right'
 clrBarTSideAttr2 = 'right'
 
 # --- title input -------------------------------------------------------------
-figTitle = ('<br>Network graph: Metabolites and BinCode2 groups ' +
-            'containing phosphopeptides with high concordance')
+# figTitle = ('<br>Network graph: Metabolites and bins ' +
+#             'containing phosphopeptides with high concordance')
+figTitle = None
 fontSzTitle = 10
 showLegTitle = False
 hoverModeTitle = 'closest'
-dMarginTitle = dict(b = 20, l = 5, r = 5, t = 40)
+dMarginTitle = {'b': 20, 'l': 5, 'r': 5, 't': 40}
 
 # --- annotations input -------------------------------------------------------
-textAnnot = ('Dark purple edge colour corresonds to higher confidence of ' +
-             'connection')
+# textAnnot = ('Dark purple edge colour corresonds to higher confidence of ' +
+#              'connection')
+textAnnot = ''
 showArrAnnot = False
 xRefAnnot = 'paper'
 yRefAnnot = 'paper'
