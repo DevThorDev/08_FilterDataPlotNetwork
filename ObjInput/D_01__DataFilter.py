@@ -16,6 +16,10 @@ pRelDatFOut = GC.P_REL_OUT_DATF
 # --- selected bin codes (BinCode2)
 lSSelBC2 = ['0', 'H']        # 'X'; X in {'A',..., 'H'} or X == '0' (all)
 # --- dictionary containing filter conditions
+# MetD / PhoD KW 05
+dFltCnd_2F_KW_05 = {'F1': (GC.S_MET_D_KW_05, '==', 'Y'),
+                    'F2': (GC.S_PHO_D_KW_05, '==', 'Y')}
+
 # IC_7p25
 dFltCnd_1F_IC_7p25 = {'F1': (GC.S_IC, '>=', 7.25)}
 dFltCnd_3F_IC_7p25 = {'F1': (GC.S_IC, '>=', 7.25),
@@ -53,7 +57,7 @@ dFltCnd_4F_IC_P_6p0 = {'F1': (GC.S_IC_P, '>=', 6.0),
                        'F3': (GC.S_MET_D_KW_05, '==', 'Y'),
                        'F4': (GC.S_PHO_D_KW_05, '==', 'Y')}
 
-dFltCnd = dFltCnd_4F_IC_7p25
+dFltCnd = dFltCnd_2F_KW_05
 
 # headers of columns used for filter
 # lSColFlt = [GC.S_IC]
