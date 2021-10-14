@@ -7,7 +7,7 @@ import copy, pprint
 class BaseClass:
     def __init__(self, inpDat):
         self.idO = 'O_00'
-        self.descO = 'Data filter'
+        self.descO = 'Base class'
         self.dIG = inpDat.dI
         self.dITp = copy.deepcopy(self.dIG[0])      # type of base class = 0
         print('Initiated "BaseClass" base object.')
